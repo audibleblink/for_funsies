@@ -48,8 +48,8 @@ var officers = {
 function countVotes() {
   for ( voter in votes ) { 
     for ( office in votes[voter] ) {
-      var runner = votes[voter][office]
-      voteCount[office][runner] === undefined ? voteCount[office][runner] = 1 : voteCount[office][runner] += 1
+      var candidate = votes[voter][office]
+      voteCount[office][candidate] === undefined ? voteCount[office][candidate] = 1 : voteCount[office][candidate] += 1
     }  
   }
 }
