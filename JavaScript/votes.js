@@ -30,7 +30,6 @@ var votes = {
   "Zane": { president: "Louise", vicePresident: "Hermann", secretary: "Fred", treasurer: "Mary" }
 }
  
-// Tally the votes in voteCount.
 var voteCount = {
   president: {},
   vicePresident: {},
@@ -38,15 +37,12 @@ var voteCount = {
   treasurer: {}
 }
  
-/* Once the votes have been tallied, assign each officer position the name of the 
-student who received the most votes. */
 var officers = {
   president: undefined,
   vicePresident: undefined,
   secretary: undefined,
   treasurer: undefined
 }
- 
  
 
 function countVotes() {
@@ -59,12 +55,12 @@ function countVotes() {
 }
 
 
-function findWinnerFor (office) {
-  var sortable = []
+function findWinnerFor(office) {
+  var tally = []
   for (candidate in voteCount[office]) {
-    sortable.push( [candidate, voteCount[office][candidate]] )
+    tally.push( [candidate, voteCount[office][candidate]] )
   }
-  return sortable.sort( function(a,b){ return a[1] - b[1]  } )[sortable.length - 1][0]
+  return tally.sort( function(a,b){ return a[1] - b[1]  } )[tally.length - 1][0]
 }
 
 
@@ -74,13 +70,11 @@ function setWinners() {
   }
 }
 
-function democracy() {
-	countVotes()
-	setWinners()
-}
 
-democracy()
- 
+countVotes()
+setWinners()
+console.log("Democracy!")
+
  
  
 // __________________________________________
