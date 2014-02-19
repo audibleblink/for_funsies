@@ -26,7 +26,6 @@ BinaryTree.prototype.insert = function(num) {
   !this.value ? this.value = num : false
 
   if (num > this.value) {
-
     if (this.rightChild) {
       this.rightChild.insert(num)
     } else {
@@ -34,7 +33,6 @@ BinaryTree.prototype.insert = function(num) {
     }
 
   } else if (num < this.value) {
-
     if (this.leftChild) {
       this.leftChild.insert(num)
     } else {
@@ -45,43 +43,17 @@ BinaryTree.prototype.insert = function(num) {
 
 BinaryTree.prototype.find = function(i) {
   if (this.value > i && this.leftChild) {
-    p("Entering leftChild")
-    height += 1
     return this.leftChild.find(i);
   } else if (this.value < i && this.rightChild){
-    p("Entering rightChild")
-    height += 1
     return this.rightChild.find(i);
   } else if (this.value === i){
-    p("Found it!")
-    this.height = height
     return this;
   } else {
-    p("Not here")
     return false;
   }
 }
 
 
-BinaryTree.prototype.trace = function(i, queue) {
-  p(queue)
-  if (this.value > i && this.leftChild) {
-    queue.enqueue( this.value )
-    return this.leftChild.trace(i);
-  } else if (this.value < i && this.rightChild){
-    queue.enqueue( this.value )
-    return this.rightChild.trace(i);
-  } else if (this.value === i){
-    queue.enqueue( this.value )
-  } else {
-    return false;
-  }
-}
-
-var  height = 0
-BinaryTree.prototype.level = function(i) {
-  return this.find(i).height
-}
 
 var Stack = function() {
   var stack = new Array
@@ -109,6 +81,7 @@ var Queue = function() {
 
 
 function ParentFinder(bTree, n1, n2) {
+  var stack1 = new Stack
 }
 
 
