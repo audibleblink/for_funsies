@@ -7,7 +7,37 @@
 // Function ParentFinder(BTree B, Node n1, Node n2)
 
 function BinaryTree(i) {
-  self.value = i || null
-  self.leftChild  = null
-  self.rightChild = null
+  this.value       = i || null
+  this.leftChild   = null
+  this.rightChild  = null
 }
+
+BinaryTree.prototype.insert = function(num) {
+  if (!this.value) {
+    this.value = num
+  }
+  if (num > this.value) {
+    if (this.rightChild) {
+      this.rightChild.insert(num)
+    } else if (!this.rightChild) {
+      this.rightChild = new BinaryTree(num)
+    };
+  } else if (num < this.value) {
+    if (this.leftChild) {
+      this.leftChild.insert(num)
+    } else if (!this.left) {
+      this.leftChild = new BinaryTree(num)
+    };
+  };
+}
+
+tree = new BinaryTree(3)
+tree.insert(2)
+tree.insert(12)
+tree.insert(14)
+tree.insert(21)
+tree.insert(8)
+tree.insert(4)
+tree.insert(7)
+tree.insert(44)
+console.log(tree);
