@@ -2,15 +2,15 @@
 // Aside from stacks and queues, do not use any data structures that are built into the language.
 
 // Example
-// Provided the function and example btree below, if ParentFinder was provided “leaf1” and “leaf3”, it 
+// Provided the function and example btree below, if parentFinder was provided “leaf1” and “leaf3”, it 
 // would return with “node1”. 
-// Function ParentFinder(BTree B, Node n1, Node n2)
+// Function parentFinder(BTree B, Node n1, Node n2)
 
 function BinaryTree(i, p) {
   this.parent      = p || null
   this.value       = i || null
-  this.leftChild   = null
   this.rightChild  = null
+  this.leftChild   = null
   this.height      = null
 }
 
@@ -58,18 +58,17 @@ var Stack = function() {
   return {
     push: function(i) {stack.push(i)},
     pop: function() {return stack.pop()},
-    isEmpty: function(){return stack[0] ? false : true}
   }
 }
 
 
-function ParentFinder(bTree, n1, n2) {
+function parentFinder(bTree, n1, n2) {
   var a, b, lastMatch, stack1, stack2
-  bTree.trace( n1, stack1=new Stack)
-  bTree.trace( n2, stack2=new Stack)
+  bTree.trace( n1, stack1=new Stack )
+  bTree.trace( n2, stack2=new Stack )
   
   while ( (a = stack1.pop()) === stack2.pop() ) {
-    if (a === undefined) {return lastMatch}
+    if (a === undefined) { return lastMatch }
     lastMatch = a
   }
   return lastMatch
@@ -82,6 +81,6 @@ var seeds = [2,12,14,21,8,9,4,7,44,17,1,5,6,10]
 for (i in seeds)
   tree.insert(seeds[i])
 
-console.log(ParentFinder(tree,17,44))
+console.log(parentFinder(tree,17,44))
 
 
