@@ -38,32 +38,19 @@ BinaryTree.prototype.insert = function(num) {
     } else {
       this.leftChild = new BinaryTree(num)
     }
-
   }
 }
 
 
 BinaryTree.prototype.find = function(i) {
-  if (this.leftChild) { 
-    p("I've found a left child. proceeding to see if it matches " + i);
-    if (this.leftChild.value === i) { 
-      p(this.leftChild);
-      return this.leftChild 
-    } else  {
-      p("this left child's value doesn't match " + i + "...reCURSING..." );
-      this.leftChild.find(i)
-    }
-  }
-
-  if (this.rightChild) {
-    p("I've found a right child. proceeding to see if it matches " + i);
-    if (this.rightChild.value === i) { 
-      p("It Matches!");
-      return this.rightChild
-    } else {
-      p("this right child's value doesn't match " + i + "...reCURSING..." );
-      this.rightChild.find(i)
-    }
+  if (this.value > i && this.leftChild) {
+    return this.leftChild.find(i);
+  } else if (this.value < i && this.rightChild){
+    return this.rightChild.find(i);
+  } else if (this.value === i){
+    return this;
+  } else {
+    return false;
   }
 }
 
@@ -78,6 +65,7 @@ tree.insert(8)
 tree.insert(4)
 tree.insert(7)
 tree.insert(44)
-console.log(tree.find(8));
+p( tree.find(7) )
+
 
 
