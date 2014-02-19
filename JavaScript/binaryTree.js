@@ -1,3 +1,11 @@
+var DEVELOPMENT = true
+
+function p(msg){
+  if (DEVELOPMENT)
+    console.log(msg);
+}
+
+
 // Using JavaScript, write a program to find the nearest common parent of any two nodes in a binary tree.
 // Aside from stacks and queues, do not use any data structures that are built into the language.
 
@@ -37,23 +45,23 @@ BinaryTree.prototype.insert = function(num) {
 
 BinaryTree.prototype.find = function(i) {
   if (this.leftChild) { 
-    // console.log("I've found a left child. proceeding to see if it matches " + i);
+    p("I've found a left child. proceeding to see if it matches " + i);
     if (this.leftChild.value === i) { 
-      // console.log(this.leftChild);
+      p(this.leftChild);
       return this.leftChild 
     } else  {
-      // console.log("this left child's value doesn't match " + i + "...reCURSING..." );
+      p("this left child's value doesn't match " + i + "...reCURSING..." );
       this.leftChild.find(i)
     }
   }
 
   if (this.rightChild) {
-    // console.log("I've found a right child. proceeding to see if it matches " + i);
+    p("I've found a right child. proceeding to see if it matches " + i);
     if (this.rightChild.value === i) { 
-      // console.log("It Matches!");
+      p("It Matches!");
       return this.rightChild
     } else {
-      // console.log("this right child's value doesn't match " + i + "...reCURSING..." );
+      p("this right child's value doesn't match " + i + "...reCURSING..." );
       this.rightChild.find(i)
     }
   }
@@ -71,4 +79,5 @@ tree.insert(4)
 tree.insert(7)
 tree.insert(44)
 console.log(tree.find(8));
+
 
