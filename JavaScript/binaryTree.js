@@ -13,23 +13,53 @@ function BinaryTree(i) {
 }
 
 BinaryTree.prototype.insert = function(num) {
-  if (!this.value) {
-    this.value = num
-  }
+  !this.value ? this.value = num : false
+
   if (num > this.value) {
+
     if (this.rightChild) {
       this.rightChild.insert(num)
-    } else if (!this.rightChild) {
+    } else {
       this.rightChild = new BinaryTree(num)
-    };
+    }
+
   } else if (num < this.value) {
+
     if (this.leftChild) {
       this.leftChild.insert(num)
-    } else if (!this.left) {
+    } else {
       this.leftChild = new BinaryTree(num)
-    };
-  };
+    }
+
+  }
 }
+
+
+BinaryTree.prototype.find = function(i) {
+  if (this.leftChild) { 
+    // console.log("I've found a left child. proceeding to see if it matches " + i);
+    if (this.leftChild.value === i) { 
+      // console.log(this.leftChild);
+      return this.leftChild 
+    } else  {
+      // console.log("this left child's value doesn't match " + i + "...reCURSING..." );
+      this.leftChild.find(i)
+    }
+  }
+
+  if (this.rightChild) {
+    // console.log("I've found a right child. proceeding to see if it matches " + i);
+    if (this.rightChild.value === i) { 
+      // console.log("It Matches!");
+      return this.rightChild
+    } else {
+      // console.log("this right child's value doesn't match " + i + "...reCURSING..." );
+      this.rightChild.find(i)
+    }
+  }
+}
+
+
 
 tree = new BinaryTree(3)
 tree.insert(2)
@@ -40,4 +70,5 @@ tree.insert(8)
 tree.insert(4)
 tree.insert(7)
 tree.insert(44)
-console.log(tree);
+console.log(tree.find(8));
+
