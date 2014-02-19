@@ -14,11 +14,12 @@ function p(msg){
 // would return with “node1”. 
 // Function ParentFinder(BTree B, Node n1, Node n2)
 
-function BinaryTree(i, h) {
+function BinaryTree(i, p) {
   this.value       = i || null
   this.leftChild   = null
   this.rightChild  = null
   this.height      = null
+  this.parent      = p || null
 }
 
 BinaryTree.prototype.insert = function(num) {
@@ -29,7 +30,7 @@ BinaryTree.prototype.insert = function(num) {
     if (this.rightChild) {
       this.rightChild.insert(num)
     } else {
-      this.rightChild = new BinaryTree(num)
+      this.rightChild = new BinaryTree(num, this.value)
     }
 
   } else if (num < this.value) {
@@ -37,7 +38,7 @@ BinaryTree.prototype.insert = function(num) {
     if (this.leftChild) {
       this.leftChild.insert(num)
     } else {
-      this.leftChild = new BinaryTree(num)
+      this.leftChild = new BinaryTree(num, this.value)
     }
   }
 }
@@ -61,6 +62,21 @@ BinaryTree.prototype.find = function(i) {
   }
 }
 
+
+BinaryTree.prototype.trace = function(i, queue) {
+  p(queue)
+  if (this.value > i && this.leftChild) {
+    queue.enqueue( this.value )
+    return this.leftChild.trace(i);
+  } else if (this.value < i && this.rightChild){
+    queue.enqueue( this.value )
+    return this.rightChild.trace(i);
+  } else if (this.value === i){
+    queue.enqueue( this.value )
+  } else {
+    return false;
+  }
+}
 
 var  height = 0
 BinaryTree.prototype.level = function(i) {
@@ -93,10 +109,6 @@ var Queue = function() {
 
 
 function ParentFinder(bTree, n1, n2) {
-  var n1q = new Queue
-  var n2q = new Queue
-
-
 }
 
 
@@ -109,7 +121,9 @@ var seeds = [2,12,14,21,8,4,7,44]
 for (i in seeds)
   tree.insert(seeds[i])
 
+// ParentFinder(tree,4,14)
 
+p(tree.find(8))
 
 
 
