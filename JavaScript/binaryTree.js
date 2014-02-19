@@ -47,7 +47,7 @@ BinaryTree.prototype.find = function(i) {
   if (this.leftChild) { 
     p("I've found a left child. proceeding to see if it matches " + i);
     if (this.leftChild.value === i) { 
-      p(this.leftChild);
+      p("It matches!");
       return this.leftChild 
     } else  {
       p("this left child's value doesn't match " + i + "...reCURSING..." );
