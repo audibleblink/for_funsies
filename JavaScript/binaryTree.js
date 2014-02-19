@@ -14,10 +14,11 @@ function p(msg){
 // would return with “node1”. 
 // Function ParentFinder(BTree B, Node n1, Node n2)
 
-function BinaryTree(i) {
+function BinaryTree(i, h) {
   this.value       = i || null
   this.leftChild   = null
   this.rightChild  = null
+  this.height      = null
 }
 
 BinaryTree.prototype.insert = function(num) {
@@ -41,31 +42,74 @@ BinaryTree.prototype.insert = function(num) {
   }
 }
 
-
 BinaryTree.prototype.find = function(i) {
   if (this.value > i && this.leftChild) {
+    p("Entering leftChild")
+    height += 1
     return this.leftChild.find(i);
   } else if (this.value < i && this.rightChild){
+    p("Entering rightChild")
+    height += 1
     return this.rightChild.find(i);
   } else if (this.value === i){
+    p("Found it!")
+    this.height = height
     return this;
   } else {
+    p("Not here")
     return false;
   }
 }
 
 
+var  height = 0
+BinaryTree.prototype.level = function(i) {
+  return this.find(i).height
+}
 
-tree = new BinaryTree(3)
-tree.insert(2)
-tree.insert(12)
-tree.insert(14)
-tree.insert(21)
-tree.insert(8)
-tree.insert(4)
-tree.insert(7)
-tree.insert(44)
-p( tree.find(7) )
+var Stack = function() {
+  var stack = new Array
+  return {
+    push: function(i) {stack.push(i)},
+    pop: function() {return stack.pop()},
+    isEmpty: function(){return stack[0] ? false : true}
+  }
+}
+
+var Queue = function() {
+  var a = new Stack
+  var b = new Stack
+  return {
+    enqueue: function(i) {
+      a.push(i)
+    },
+    dequeue: function() {
+      while (!a.isEmpty())
+        b.push( a.pop() );
+      return b.pop()
+    }
+  }
+}
+
+
+function ParentFinder(bTree, n1, n2) {
+  var n1q = new Queue
+  var n2q = new Queue
+
+
+}
+
+
+
+
+
+var tree  = new BinaryTree(3)
+var seeds = [2,12,14,21,8,4,7,44]
+
+for (i in seeds)
+  tree.insert(seeds[i])
+
+
 
 
 
