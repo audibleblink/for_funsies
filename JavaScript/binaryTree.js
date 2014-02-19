@@ -1,11 +1,3 @@
-var DEVELOPMENT = true
-
-function p(msg){
-  if (DEVELOPMENT)
-    console.log(msg);
-}
-
-
 // Using JavaScript, write a program to find the nearest common parent of any two nodes in a binary tree.
 // Aside from stacks and queues, do not use any data structures that are built into the language.
 
@@ -53,6 +45,13 @@ BinaryTree.prototype.find = function(i) {
   }
 }
 
+BinaryTree.prototype.trace = function(node, stack) {
+  var nodeParent = this.find(node).parent
+  if (!nodeParent) {return false}  
+  stack.push( nodeParent )
+  this.trace( nodeParent, stack )
+}
+
 
 
 var Stack = function() {
@@ -64,39 +63,33 @@ var Stack = function() {
   }
 }
 
-var Queue = function() {
-  var a = new Stack
-  var b = new Stack
-  return {
-    enqueue: function(i) {
-      a.push(i)
-    },
-    dequeue: function() {
-      while (!a.isEmpty())
-        b.push( a.pop() );
-      return b.pop()
-    }
-  }
-}
-
 
 function ParentFinder(bTree, n1, n2) {
   var stack1 = new Stack
+  var stack2 = new Stack
+  bTree.trace( n1, stack1)
+  bTree.trace( n2, stack2)
+  
+
+  var lastMatch = 0
+  var a = 0
+  var b = 0
+
+  while (a === b) {
+    if (a === undefined) {return lastMatch}
+    lastMatch = a
+    a = stack1.pop()
+    b = stack2.pop()
+  }
+  return lastMatch
 }
 
-
-
-
-
 var tree  = new BinaryTree(3)
-var seeds = [2,12,14,21,8,4,7,44]
+var seeds = [2,12,14,21,8,9,4,7,44,17,1,5,6,10]
 
 for (i in seeds)
   tree.insert(seeds[i])
 
-// ParentFinder(tree,4,14)
-
-p(tree.find(8))
-
+console.log(ParentFinder(tree,12,2))
 
 
