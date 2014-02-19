@@ -7,11 +7,11 @@
 // Function ParentFinder(BTree B, Node n1, Node n2)
 
 function BinaryTree(i, p) {
+  this.parent      = p || null
   this.value       = i || null
   this.leftChild   = null
   this.rightChild  = null
   this.height      = null
-  this.parent      = p || null
 }
 
 BinaryTree.prototype.insert = function(num) {
@@ -53,7 +53,6 @@ BinaryTree.prototype.trace = function(node, stack) {
 }
 
 
-
 var Stack = function() {
   var stack = new Array
   return {
@@ -65,24 +64,17 @@ var Stack = function() {
 
 
 function ParentFinder(bTree, n1, n2) {
-  var stack1 = new Stack
-  var stack2 = new Stack
-  bTree.trace( n1, stack1)
-  bTree.trace( n2, stack2)
+  var a, b, lastMatch, stack1, stack2
+  bTree.trace( n1, stack1=new Stack)
+  bTree.trace( n2, stack2=new Stack)
   
-
-  var lastMatch = 0
-  var a = 0
-  var b = 0
-
-  while (a === b) {
+  while ( (a = stack1.pop()) === stack2.pop() ) {
     if (a === undefined) {return lastMatch}
     lastMatch = a
-    a = stack1.pop()
-    b = stack2.pop()
   }
   return lastMatch
 }
+
 
 var tree  = new BinaryTree(3)
 var seeds = [2,12,14,21,8,9,4,7,44,17,1,5,6,10]
@@ -90,6 +82,6 @@ var seeds = [2,12,14,21,8,9,4,7,44,17,1,5,6,10]
 for (i in seeds)
   tree.insert(seeds[i])
 
-console.log(ParentFinder(tree,12,2))
+console.log(ParentFinder(tree,17,44))
 
 
