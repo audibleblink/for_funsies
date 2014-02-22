@@ -14,9 +14,10 @@ describe Rover do
       rover1.move("LMLMLMLMM").should eq('1 3 N')
     end  end
 
-  context "#hello" do
-    it "returns hello" do
-      rover2.hello.should eq('hello')
+  context "#turn" do
+    it "should turn the rover to the appropriate direction" do
+      rover1.turn("L")
+      rover1.direction.should eq("W")
     end
   end
 
