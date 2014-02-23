@@ -1,7 +1,17 @@
 class Sensor
 
-  def detect_bounds
-    
+  def initialize grid
+    @grid = grid
+  end
+
+  def out_of_bounds? rover
+    if rover.coordinates[0] > @grid.max_x
+      return true
+    elsif rover.coordinates[1] > @grid.max_y
+      return true
+    else
+      return false
+    end
   end
 
 end
