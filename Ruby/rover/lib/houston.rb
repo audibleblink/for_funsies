@@ -19,7 +19,7 @@ class Houston
   end
 
   def self.sitrep rover, directives
-    coords, dir = rover.coordinates, rover.direction
+    coords, dir = rover.coordinates.dup, rover.direction.dup
     phantom = Rover.new({coords: coords, direction: dir})
     phantom.move(directives)
     raise ArgumentError, 'These directives would drive the rover over the edge of the plateau' if @sensor.out_of_bounds? phantom
