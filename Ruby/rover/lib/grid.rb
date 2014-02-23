@@ -1,5 +1,6 @@
 class Grid
 
+  attr_reader :max_x, :max_y
   def initialize(obj, a=0, b=0)
     @max_x, @max_y = obj[:x], obj[:y]
     @min_x, @min_y = a, b
