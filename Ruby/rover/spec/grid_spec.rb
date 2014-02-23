@@ -1,4 +1,3 @@
-# require_relative '../lib/grid'
 require "spec_helper"
 
 describe Grid do

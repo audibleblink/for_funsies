@@ -1,4 +1,3 @@
-# require_relative '../lib/rover'
 require "spec_helper"
 
 describe Rover do
@@ -49,3 +48,5 @@ describe Rover do
   end
 
 end
+
+

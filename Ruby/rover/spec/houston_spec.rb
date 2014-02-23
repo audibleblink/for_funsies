@@ -1,4 +1,3 @@
-# require_relative '../lib/houston'
 require "spec_helper"
 
 describe Parser do
@@ -19,4 +18,15 @@ describe Parser do
 
   end
   
+end
+
+describe Houston do
+  context "#sitrep" do
+
+    let!(:rover) { Rover.new({coords: [5,5], direction: "N"}) }
+    let!(:sensor) { Sensor.new(Grid.new( x:5, y:5 )) }
+    it "should detect if directives would cause the drone to fall" do
+      expect { Houston.sitrep(rover, "M") }.to raise_error
+    end
+  end
 end
