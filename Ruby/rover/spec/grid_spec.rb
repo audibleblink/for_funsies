@@ -1,8 +1,9 @@
-require_relative '../lib/grid'
+# require_relative '../lib/grid'
+require "spec_helper"
 
 describe Grid do
 
-  let!(:grid) { Grid.new(5,5) }
+  let!(:grid) { Grid.new({x:5, y:5}) }
 
   context "#sitrep" do
     it "should report the grid boundaires" do
