@@ -1,31 +1,37 @@
-require "rover"
-require "grid"
+require_relative "./rover"
+require_relative "./grid"
 
 class Houston
 
   def self.liftoff
     @comms  = Parser.fetch_communication
-    @grid  = Grid.new( @comms[:grid_size] )
+    @sensor = Sensor.new(Grid.new( @comms[:grid_size] ))
     @rover1 = Rover.new( @comms[:rover1][:start_position] )
     @rover2 = Rover.new( @comms[:rover2][:start_position] )
+
   end
 
   def self.move!
-    p @rover1.move(@comms[:rover1][:commands])
-    p @rover2.move(@comms[:rover2][:commands])
+    sitrep @rover1, @comms[:rover1][:commands]
+    puts @rover1.move(@comms[:rover1][:commands])
+    sitrep @rover2, @comms[:rover2][:commands]
+    puts @rover2.move(@comms[:rover2][:commands])
   end
 
+  def self.sitrep rover, directives
+    coords, dir = rover.coordinates, rover.direction
+    phantom = Rover.new({coords: coords, direction: dir})
+    phantom.move(directives)
+    raise ArgumentError, 'These directives would drive the rover over the edge of the plateau' if @sensor.out_of_bounds? phantom
+  end
 
 end
 
 
-
-
 class Parser
 
-
   def self.fetch_communication
-    @document = File.open("directives.txt", 'r')
+    @document = File.open(Dir[File.expand_path(File.join(File.dirname(__FILE__), '../directives.txt'))][0], 'r')
     comms = {
       grid_size: grid_size,
       rover1: { start_position: start_position, commands: commands },
